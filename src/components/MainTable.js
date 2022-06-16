@@ -11,7 +11,7 @@ const MainTable = () => {
       {Object.keys(workingList).map((item) => (
         <Grid key={item} container spacing={2} sx={{ py: 2 }}>
           <Grid item xs={8}>
-            <Paper>{item}</Paper>
+            <Paper sx={{ overflow: "hidden" }}>{item}</Paper>
           </Grid>
           <Grid item xs={4}>
             <Paper>{workingList[item].amount}</Paper>

@@ -6,7 +6,18 @@ export const WorkingListContext = createContext();
 
 const WorkingListProvider = ({ children }) => {
   const [workingList, setWorkingList] = useState({});
+  const [error, setError] = useState(null);
+  const checkCode = (codeStr) => {
+    const checkRegex = /^(\d){19}(.){12}()(.){6}()/;
+    console.log("checkRegex: ", checkRegex.test(codeStr));
+    return checkRegex.test(codeStr);
+  };
   const addItem = (code, amount) => {
+    if (!checkCode(code)) {
+      setError("Неверная строка! Попробуйте еще раз");
+      return;
+    }
+    setError(null);
     let oldAmount = 0;
     if (workingList[code]) {
       oldAmount = workingList[code].amount;
@@ -25,6 +36,8 @@ const WorkingListProvider = ({ children }) => {
     setWorkingList,
     addItem,
     exportListToCSV,
+    error,
+    setError,
   };
 
   return (
