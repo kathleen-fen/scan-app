@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Paper } from "@mui/material";
+import MainInput from "./components/MainInput";
+import MainTable from "./components/MainTable";
+import { Button } from "@mui/material";
+
+import { useWorkingList } from "./context/WorkingList";
 
 function App() {
+  const { exportListToCSV } = useWorkingList();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Paper sx={{ mx: "auto", p: 4 }} elevation={0}>
+      <MainInput />
+      <MainTable />
+      <Button variant="outlined" sx={{ m: 4 }} onClick={exportListToCSV}>
+        Скачать csv файл
+      </Button>
+    </Paper>
   );
 }
 
